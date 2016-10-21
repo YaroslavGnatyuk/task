@@ -1,13 +1,10 @@
-/**
- * Created by yroslav on 10/20/16.
- */
-
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import ua.in.gnatyuk.merge_sort.MergeSort;
 import ua.in.gnatyuk.quick_sort.QuickSort;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class Sorting {
@@ -17,23 +14,23 @@ public class Sorting {
     private long start;
     private long finish;
 
-    Logger log = Logger.getLogger(Sorting.class);
+    private static Logger log = Logger.getLogger(Sorting.class);
 
     @Before
     public void fillTheArray(){
-        unsortedArray = new Random().ints(3000000, 0, 100).toArray();
+        unsortedArray = new Random().ints(300, 0, 100).toArray();
     }
 
     @Test
     public void quickSort(){
 //        Arrays.stream(unsortedArray).boxed().map(l->String.valueOf(l) + " ").forEach(log::info);
+//        System.out.println();
 
         start = System.currentTimeMillis();
-        sortedArray = QuickSort.sort(unsortedArray);
+        sortedArray = QuickSort.getLargest(unsortedArray,10);
         finish = System.currentTimeMillis();
 
-//        System.out.println();
-//        Arrays.stream(sortedArray).boxed().map(l->String.valueOf(l) + " ").forEach(log::info);
+        Arrays.stream(sortedArray).boxed().map(l->String.valueOf(l) + " ").forEach(log::info);
 
         log.info("\nTotal time of quick sorting is:   " + (finish-start) + " milliseconds\n");
     }
@@ -44,10 +41,10 @@ public class Sorting {
 //        System.out.println();
 
         start = System.currentTimeMillis();
-        sortedArray = MergeSort.sort(unsortedArray);
+        sortedArray = MergeSort.getLargest(unsortedArray, 7);
         finish = System.currentTimeMillis();
 
-//        Arrays.stream(unsortedArray).boxed().map(l->String.valueOf(l) + " ").forEach(log::info);
+        Arrays.stream(sortedArray).boxed().map(l->String.valueOf(l) + " ").forEach(log::info);
 
         log.info("\nTotal time of merge sorting is:   " + (finish-start) + " milliseconds");
     }

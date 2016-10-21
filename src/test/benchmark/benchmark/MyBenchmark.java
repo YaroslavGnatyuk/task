@@ -13,10 +13,6 @@ import ua.in.gnatyuk.quick_sort.QuickSort;
 
 import java.util.Random;
 
-/**
- * Created by yroslav on 10/21/16.
- */
-
 @State(Scope.Thread)
 public class MyBenchmark {
     private int[] unsortedArray;
@@ -28,12 +24,12 @@ public class MyBenchmark {
 
     @Benchmark
     public void quickSort(){
-        QuickSort.sort(unsortedArray);
+        QuickSort.getLargest(unsortedArray,5);
     }
 
     @Benchmark
     public void mergeSort(){
-        MergeSort.sort(unsortedArray);
+        MergeSort.getLargest(unsortedArray,5);
     }
 
     public static void main(String[] args) throws RunnerException {

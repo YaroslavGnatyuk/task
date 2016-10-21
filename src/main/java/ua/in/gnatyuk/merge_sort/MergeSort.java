@@ -1,17 +1,17 @@
 package ua.in.gnatyuk.merge_sort;
 
-/**
- * Created by yroslav on 10/21/16.
- */
+import org.apache.log4j.Logger;
+
 public class MergeSort {
     private static int[] theArray;
+    private static Logger log = Logger.getLogger(MergeSort.class);
 
-    public static int[] sort(int[] array){
+    public static int[] getLargest(int[] array, int quantity){
         theArray = array;
-
         int[] workSpace = new int[theArray.length];
-        recMergeSort(workSpace, 0, theArray.length-1);
-        return theArray;
+        recMergeSort(workSpace, 0, theArray.length - 1);
+
+        return getMaxElements(quantity);
     }
 
     private static void recMergeSort(int[] workSpace, int lowerBound,
@@ -50,5 +50,27 @@ public class MergeSort {
 
         for(j=0; j<n; j++)
             theArray[lowerBound+j] = workSpace[j];
+    }
+
+    public static int[] getMaxElements(int quantity){
+        if(isValidQuantity(quantity)){
+
+            int[] maxElement = new int[quantity];
+            int length = theArray.length-1;
+
+            for (int i = 0; i < quantity ; i++) {
+                maxElement[i] = theArray[length-i];
+            }
+
+            return maxElement;
+        }
+        else {
+            log.info("The value of quantity doesn't valid");
+            return null;
+        }
+    }
+
+    public static boolean isValidQuantity(int quantity){
+        return (quantity >= 0) && (quantity <= theArray.length);
     }
 }

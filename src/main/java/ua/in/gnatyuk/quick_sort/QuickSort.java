@@ -1,18 +1,15 @@
 package ua.in.gnatyuk.quick_sort;
 
-/**
- * Created by yroslav on 10/21/16.
- */
 public class QuickSort {
     private static int[] theArray;
 
     private QuickSort() {
     }
 
-    public static int[] sort(int[] array){
+    public static int[] getLargest(int[] array, int quantity){
         theArray = array;
         recQuickSort(0, theArray.length-1);
-        return theArray;
+        return getMaxElements(quantity);
     }
 
     private static void recQuickSort(int left, int right){
@@ -95,5 +92,25 @@ public class QuickSort {
             if (theArray[right - 1] > theArray[right])
                 swap(right - 1, right);
         }
+    }
+
+    public static int[] getMaxElements(int quantity) throws NullPointerException{
+        if(isValidQuantity(quantity)){
+
+            int[] maxElement = new int[quantity];
+            int length = theArray.length-1;
+
+            for (int i = 0; i < quantity ; i++) {
+                maxElement[i] = theArray[length-i];
+            }
+
+            return maxElement;
+        }
+        else
+            return null;
+    }
+
+    public static boolean isValidQuantity(int quantity){
+        return (quantity >= 0) && (quantity <= theArray.length);
     }
 }
