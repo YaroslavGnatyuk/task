@@ -1,7 +1,10 @@
 package ua.in.gnatyuk.quick_sort;
 
+import org.apache.log4j.Logger;
+
 public class QuickSort {
     private static int[] theArray;
+    private static Logger log = Logger.getLogger(QuickSort.class);
 
     private QuickSort() {
     }
@@ -106,8 +109,10 @@ public class QuickSort {
 
             return maxElement;
         }
-        else
+        else {
+            log.info(" The value of quantity doesn't valid ");
             return null;
+        }
     }
 
     public static boolean isValidQuantity(int quantity){
